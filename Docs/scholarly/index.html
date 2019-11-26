@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Scholarly HTML</title>
+    <link rel="stylesheet" href="css/scholarly.min.css">
+    <script src="js/scholarly.min.js"></script>
+</head>
+<body prefix="schema: http://schema.org" typeof="schema:ScholarlyArticle">
+<header>
+    <div class="banner">
+        <img src="scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        <div class="status"><span property="schema:name">Facultatea de Informatică Iași</span></div>
+    </div>
+    <h1 property="schema:name">Electrik Architecture</h1>
+</header>
+
+<div role="contentinfo">
+    <section typeof="sa:AuthorsList">
+        <h2>Authors</h2>
+        <ul>
+            <li>Radeanu Razvan</li>
+        </ul>
+    </section>
+</div>
+<section id="introducere" role="doc-introducere">
+    <!-- review? -->
+    <h2 property="schema:name">Introducere</h2>
+    <p>
+        Electrik este o aplicatie Web de tip MashUp, impreunand mai multe surse de date intr-o singura forma de prezentare.
+        Datele adunate se refera la baterii, acumulatori si provideri de energie pentru device-uri electrice precum drone, biciclete, masini, etc.
+        Pe langa, exista posibilitatea de a oferi notificari anumitor clienti in legatura cu noutati despre preturi si stocuri si expunerea noutatilor 
+        printr-un flux RSS. 
+    </p>
+    <p>
+        Acest document descrie arhitectura de ansamblu a aplicației.
+    </p>
+</section>
+<section id="arhutecturaroca" role="definition">
+    <h2 property="schema:name">Arhitectura</h2>
+    <p>
+        Aplicatia este impartita in 2 principale componente: <b>Electrik Catalog</b> si <b>Electrik BackOffice</b>. Amandoua sunt 
+        aplicatii client de tip SPA (Single Page Application) ce consuma propriul API REST(detalii in diagrame), folosind HTTP drept protocol de comunicare.
+        Tehnologiile folosite sunt TypeScript, Webpack, SCSS, HTML5 (pentru client) si NodeJS (pentru server). MongoDb este folosit drept mecanism de persistenta.
+
+        <br><br><br>
+
+        Pe langa perechile prezentate, exista si un message bus pe care sunt agregate datele ce urmeaza sa fie sincronizate in 
+        propria baza de date. O suita de alte api-uri care creeaza definitii de produse servesc inspre acest sens.
+    </p>
+    <section id="Serverroca" role="definition">
+        <h3 property="schema:name">Serverul</h3>
+        <p>
+            API-urile de baterii, acumulatoare si provider de energie creeaza propriile resurse si anunta schimbarile
+            prin mesaje ce sunt transmise prin message bus spre serviciile de sincronizare. Serviciile de sincronizare interpreteaza
+            mesajele si salveaza datele ca fiind "definitii" ce urmeaza sa fie promovate de un administrator in BackOffice. Definitiile contin
+            detalii sumare despre produse. Promovarea definitiilor la produse de catalog presupune introducerea unui stoc si unui pret. Dupa acest pas,
+            produsul devine vizibil in Catalog.
+            <br><br>
+            Toate celelalte operatii se fac independent, din backoffice.
+        </p>
+    </section>
+    <section id="clientroca" role="definition">
+        <h3>Clientul</h3>
+        <p>
+            Clientul contine doar logica de prezentare. Toata logica de "business" este encapsulata in backend.
+        </p>
+    </section>
+<section id="moduleprincipale" role="definition">
+    <h2 property="schema:name">Module principale</h2>
+    <section id="Login" role="definition">
+        <h3 property="schema:name">Login</h3>
+        <p>Un administrator se va autentifica in backoffice cu un set de credentiale predefinite. Controller-ul de Identitate 
+            va fi responsabil sa ofere in schimb un token JWT ce va oferi accesul la toate celelate resurse din suita Back Office.
+        </p>
+    </section>
+
+    <section id="Gestiune definitii" role="definition">
+        <h3 property="schema:name">Gestiune definitii</h3>
+       Administratorul va putea vedea toate definitiile adunate de la provideri si va alege pe care sa le stearga sau pe care sa le promoveze
+       la produse de catalog. Promovarea presupune adaugarea unui stoc si unui pret.
+    </section>
+    <section id="Gestiune clienti" role="definition">
+        <h3 property="schema:name">Gestiune clienti</h3>
+        Administratorul poate gestiona clientii Electrik, adaugand sau stergand clienti. Totodata, clientii pot fi marcati
+        ca fiind fideli, primind notificari in legatura cu oferte sau schimbari ale stocurilor.
+    </section>
+    <section id="Gestiune comenzi" role="definition">
+        <h3 property="schema:name">Gestiune comenzi</h3>
+        Administratorul poate crea o comanda pentru un anumit client inregistrat, alegand anumite produse din stoc.
+    </section>
+    <section id="Flux RSS" role="definition">
+        <h3 property="schema:name">Flux RSS</h3>
+        ?????
+    </section>
+    <p></p>
+</section>
+<section id="structuracod" role="definition">
+    <h2 property="schema:name">Structuda codului</h2>
+    <img src="./img/code-structure.PNG" alt="">
+</section>
+<section id="modelaredate" role="definition">
+    <h2 property="schema:name">Modelarea Datelor</h2>
+    <img src ="./img/energy-provider-definition.PNG">
+    <img src ="./img/catalog-energy-provider.PNG">
+    <img src='./img/accumulator-definition.PNG'>
+    <img src="./img/battery-definition.PNG" alt="">
+    <img src="./img/catalog-battery.PNG" alt="">
+    <img src="./img/customer.PNG" alt="">
+    <img src="./img/order.PNG" alt="">
+</section>
+<section id="stocare" role="definition">
+    <h2 property="schema:name">Stocarea datelor</h2>
+    <section>
+        La nivel de client, datele vor fi stocate in local storage. La nivel de server, datele vor fi stocate in MongoDb.
+    </section>
+</section>
+
+</body>
+</html>
