@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const config = require('./config');
-const batteriesController = require('./controllers/batteries.controller');
+const accumulatorsController = require('./controllers/accumulators.controller');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.connectionStrings.mongo, { useNewUrlParser: true })
@@ -15,9 +15,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/api/batteries', batteriesController);
+app.use('/api/accumulators', accumulatorsController);
 
-let port = process.env.PORT || 4000;
+let port = process.env.PORT || 4100;
 
 app.listen(port, function(){
     console.log('Listening on port ' + port);

@@ -1,3 +1,5 @@
 module.exports = {
-    batteries: 'providers-batteries'
+    batteries: 'definitions-batteries',
+    accumulators: 'definitions-accumulators',
+    energyProviders: 'definitions-energy-providers'
 };

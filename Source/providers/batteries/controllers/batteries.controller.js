@@ -2,7 +2,7 @@ const express = require('express');
 const validator = require('fluent-validator');
 const newUuid = require('uuid/v1');
 const response = require('../../../kernel/response/electrik-response');
-const busFactory = require('../../../kernel/messaging/bus');
+const MessageBus = require('../../../kernel/messaging/bus');
 const queues = require('../../../kernel/messaging/queues');
 const config = require('../config');
 const Battery = require('../models/battery.model');
@@ -27,7 +27,7 @@ batteriesController.route('/').post(function (req, res) {
   
     dbBattery.save().then(async _ => {
       res.status(201).send();
-      await busFactory(config).publish(queues.batteries, battery);
+      await new MessageBus(config).publish(queues.batteries, battery);
     });
   });
 });
