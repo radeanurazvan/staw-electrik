@@ -14,12 +14,13 @@ module.exports = class BusSubscriptions {
 
     async bootstrap() {
         this.#bus.subscribe(queues.batteries, async x => {
-            console.log("WTFFF", x);
             await this.#repositories.batteries.addDefinition(new BatteryDefinition(x.id, x.name, x.size))
         });
-        this.#bus.subscribe(queues.accumulators, x => 
-            this.#repositories.accumulators.addDefinition(new AccumulatorDefinition(x.id, x.name, x.category)));
-        this.#bus.subscribe(queues.energyProviders, x => 
-            this.#repositories.energyProviders.addDefinition(new EnergyProviderDefinition(x.id, x.name, x.coordinates)));
+        this.#bus.subscribe(queues.accumulators, async x => {
+            await this.#repositories.accumulators.addDefinition(new AccumulatorDefinition(x.id, x.name, x.category, x.size))
+        });
+        this.#bus.subscribe(queues.energyProviders, async x => {
+            await this.#repositories.energyProviders.addDefinition(new EnergyProviderDefinition(x.id, x.name, x.coordinates))
+        });
     }
 }

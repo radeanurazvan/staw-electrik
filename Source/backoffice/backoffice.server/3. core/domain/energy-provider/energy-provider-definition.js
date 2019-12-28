@@ -8,4 +8,8 @@ module.exports = class EnergyProviderDefinition {
         this.#name = name;
         this.#coordinates = coordinates;
     }
+
+    get id() { return this.#id; }
+    get name() { return this.#name; }
+    get coordinates() { return this.#coordinates; }
 }
