@@ -1,3 +1,9 @@
+class AccumulatorDefinition {
+    id;
+    name;
+    category; //bike, car, drone
+}
+
 class BatteryDefinition {
     id;
     name;
@@ -30,7 +36,6 @@ class Customer {
     name;
     email;
 }
-
 
 class Order {
     id;
