@@ -1,3 +1,5 @@
+const CatalogEnergyProvider = require('./catalog-energy-provider');
+
 module.exports = class EnergyProviderDefinition {
     #id;
     #name;
@@ -12,4 +14,8 @@ module.exports = class EnergyProviderDefinition {
     get id() { return this.#id; }
     get name() { return this.#name; }
     get coordinates() { return this.#coordinates; }
+
+    promote(pricePerUnit) {
+        return new CatalogEnergyProvider(this, pricePerUnit);
+    }
 }

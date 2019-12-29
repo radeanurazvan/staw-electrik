@@ -1,7 +1,7 @@
 const validator = require('fluent-validator');
 const Result = require('../../../../kernel/functional/result');
 
-module.exports = class BatteriesService {
+module.exports = class EnergyProvidersService {
     #repository;
 
     constructor(repository) {
@@ -17,16 +17,15 @@ module.exports = class BatteriesService {
             .onSuccess(async () => await this.#repository.deleteDefinition(definition.id));
     }
 
-    async promoteDefinition(id, stock, price) {
+    async promoteDefinition(id, pricePerUnit) {
         const definition = await this.#repository.getDefinition(id);
         const result = validator()
             .validate(definition).param('definition').isNotNullOrUndefined()
-            .validate(price).param('price').isPositive()
-            .validate(stock).param('stock').isPositive();
+            .validate(pricePerUnit).param('pricePerUnit').isPositive();
         
         return Result.fromValidationResult(result, definition)
-            .map(d => d.promote(stock, price))
-            .onSuccess(async a => { await this.#repository.addInCatalog(a)})
+            .map(d => d.promote(pricePerUnit))
+            .onSuccess(async ep => { await this.#repository.addInCatalog(ep)})
             .onSuccess(async () => await this.#repository.deleteDefinition(definition.id));
     }
 }
