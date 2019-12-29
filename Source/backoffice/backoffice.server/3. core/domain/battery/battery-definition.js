@@ -1,3 +1,5 @@
+const CatalogBattery = require('./catalog-battery');
+
 module.exports = class BatteryDefinition {
     #id;
     #name;
@@ -12,4 +14,8 @@ module.exports = class BatteryDefinition {
     get id() { return this.#id; }
     get name() { return this.#name; }
     get size() { return this.#size; }
+
+    promote(stock, price) {
+        return new CatalogBattery(this, stock, price); 
+    }
 }
