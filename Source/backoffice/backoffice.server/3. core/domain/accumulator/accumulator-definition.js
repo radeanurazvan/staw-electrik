@@ -1,3 +1,5 @@
+const CatalogAccumulator = require('./catalog-accumulator');
+
 module.exports = class AccumulatorDefinition {
     #id;
     #name;
@@ -15,4 +17,8 @@ module.exports = class AccumulatorDefinition {
     get name() { return this.#name; }
     get category() { return this.#category; }
     get size() { return this.#size; }
+
+    promote(stock, price) {
+        return new CatalogAccumulator(this, stock, price); 
+    }
 }

@@ -5,6 +5,9 @@ const BatteryDefinition = require('../../../3. core/domain/battery/battery-defin
 module.exports = class BatteriesRepository {
     async getDefinition(id) {
         const dbDefinition = await BatteryDefinitionModel.findById(id);
+        if(!dbDefinition) {
+            return null;
+        }
         return new BatteryDefinition(dbDefinition._id, dbDefinition.name, dbDefinition.size);
     }
 

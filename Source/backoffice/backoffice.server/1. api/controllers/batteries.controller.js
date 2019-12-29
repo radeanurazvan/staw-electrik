@@ -11,7 +11,6 @@ batteriesController.route('/definitions/:id').patch(function (req, res) {
     });
 });
 
-
 batteriesController.route('/definitions/:id').delete(function (req, res) {
     runOnService(async service => {
         const result = await service.deleteDefinition(req.params.id);
