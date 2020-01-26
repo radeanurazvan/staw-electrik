@@ -51,4 +51,13 @@ module.exports = class AccumulatorsRepository {
 
         return new CatalogAccumulator(dbAccumulator.definition, dbAccumulator.stock, dbAccumulator.price, dbAccumulator._id);
     }
+
+    updateCatalogAccumulator(accumulator) {
+        return CatalogAccumulator.findByIdAndUpdate(accumulator.id, {
+            _id: accumulator.id,
+            definition: accumulator.definition,
+            stock: accumulator.stock,
+            price: accumulator.price
+        });
+    }
 }

@@ -49,4 +49,13 @@ module.exports = class BatteriesRepository {
 
         return new CatalogBattery(dbBattery.definition, dbBattery.stock, dbBattery.price, dbBattery._id);
     }
+
+    updateCatalogBattery(battery) {
+        return CatalogBattery.findByIdAndUpdate(battery.id, {
+            _id: battery.id,
+            definition: battery.definition,
+            stock: battery.stock,
+            price: battery.price
+        });
+    }
 };

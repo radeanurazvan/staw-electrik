@@ -13,6 +13,15 @@ module.exports = class CatalogBattery {
         this.#price = price;
     }
 
+    decreaseStock(quantity) {
+        const canDecreaseStock = quantity > 0 && quantity <= this.#stock;
+        if(!canDecreaseStock) {
+            return;
+        }
+
+        this.#stock -= quantity;
+    }
+
     get id() { return this.#id; }
     get definition() { return this.#definition; }
     get stock() { return this.#stock; }
