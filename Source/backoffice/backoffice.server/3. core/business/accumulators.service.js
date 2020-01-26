@@ -13,7 +13,7 @@ module.exports = class AccumulatorsService {
         const result = validator()
             .validate(definition).param('definition').isNotNullOrUndefined();
 
-        return Result.fromValidationResult(result, definition)
+        return Result.fromValidationResult(result)
             .onSuccess(async () => await this.#repository.deleteDefinition(definition.id));
     }
 
