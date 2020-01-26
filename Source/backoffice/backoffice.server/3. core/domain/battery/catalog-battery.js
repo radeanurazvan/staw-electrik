@@ -6,8 +6,8 @@ module.exports = class CatalogBattery {
     #stock;
     #price;
 
-    constructor(definition, stock, price) {
-        this.#id = newUuid();
+    constructor(definition, stock, price, id = newUuid()) {
+        this.#id = id;
         this.#definition = definition;
         this.#stock = stock;
         this.#price = price;

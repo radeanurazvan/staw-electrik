@@ -1,6 +1,7 @@
 const AccumulatorDefinitionModel = require('../models/accumulator-definition.model');
 const CatalogAccumulatorModel = require('../models/catalog-accumulator.model');
 const AccumulatorDefinition = require('../../../3. core/domain/accumulator/accumulator-definition')
+const CatalogAccumulator = require('../../../3. core/domain/accumulator/catalog-accumulator')
 
 module.exports = class AccumulatorsRepository {
     async getDefinition(id) {
@@ -40,5 +41,14 @@ module.exports = class AccumulatorsRepository {
         });
         
         return dbAccumulator.save();
+    }
+
+    async getCatalogAccumulator(id) {
+        const dbAccumulator = await CatalogAccumulatorModel.findById(id);
+        if(!dbAccumulator) {
+            return null;
+        }
+
+        return new CatalogAccumulator(dbAccumulator.definition, dbAccumulator.stock, dbAccumulator.price, dbAccumulator._id);
     }
 }

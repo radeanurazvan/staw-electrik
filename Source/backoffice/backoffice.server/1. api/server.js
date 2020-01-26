@@ -19,6 +19,7 @@ const batteriesController = require('./controllers/batteries.controller');
 const accumulatorsController = require('./controllers/accumulators.controller');
 const energyProvidersController = require('./controllers/energy-providers.controller');
 const customersController = require('./controllers/customers.controller');
+const ordersController = require('./controllers/orders.controller');
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use('/api/batteries', batteriesController);
 app.use('/api/accumulators', accumulatorsController);
 app.use('/api/energyProviders', energyProvidersController);
 app.use('/api/customers', customersController);
+app.use('/api/orders', ordersController);
 
 new Bootstrapper().bootsrapAll();
 

@@ -1,6 +1,7 @@
 const BatteryDefinitionModel = require('../models/battery-definition.model');
 const CatalogBatteryModel = require('../models/catalog-battery.model');
 const BatteryDefinition = require('../../../3. core/domain/battery/battery-definition');
+const CatalogBattery = require('../../../3. core/domain/battery/catalog-battery');
 
 module.exports = class BatteriesRepository {
     async getDefinition(id) {
@@ -38,5 +39,14 @@ module.exports = class BatteriesRepository {
         });
         
          return dbBattery.save();
+    }
+
+    async getCatalogBattery(id) {
+        const dbBattery = await CatalogBatteryModel.findById(id);
+        if(!dbBattery) {
+            return null;
+        }
+
+        return new CatalogBattery(dbBattery.definition, dbBattery.stock, dbBattery.price, dbBattery._id);
     }
 };
