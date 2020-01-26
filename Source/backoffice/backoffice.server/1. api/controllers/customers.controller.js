@@ -11,6 +11,13 @@ customersController.route('').post(function (req, res) {
     });
 });
 
+customersController.route('/:id/loyalty').patch(function (req, res) {
+    runOnService(async service => {
+        const result = await service.toggleLoyalty(req.params.id);
+        res.status(result.httpCode(204)).json(result.toPlain());
+    });
+});
+
 customersController.route('/:id').delete(function (req, res) {
     runOnService(async service => {
         const result = await service.deleteCustomer(req.params.id);

@@ -13,21 +13,29 @@ module.exports = class BatteriesRepository {
             return null;
         }
 
-        return new Customer(dbCustomer.name, dbCustomer.email, dbCustomer._id);
+        return new Customer(dbCustomer.name, dbCustomer.email, dbCustomer._id, dbCustomer.isLoyal);
     }
 
     addCustomer(customer) {
         const dbCustomer = new CustomerModel({
             _id: customer.id,
             name: customer.name,
-            email: customer.email
+            email: customer.email,
+            isLoyal: customer.isLoyal
         });
         
          return dbCustomer.save();
     }
 
+    updateCustomer(customer) {
+        return CustomerModel.findByIdAndUpdate(customer.id, {
+            name: customer.name,
+            email: customer.email,
+            isLoyal: customer.isLoyal
+        });
+    }
+
     deleteCustomer(customer) {
-        console.log("Deleting ", customer.id);
         return CustomerModel.deleteOne({_id: customer.id});
     }
 };

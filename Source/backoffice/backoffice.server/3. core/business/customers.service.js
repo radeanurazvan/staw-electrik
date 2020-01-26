@@ -23,12 +23,20 @@ module.exports = class CustomersService {
 
     async deleteCustomer(id) {
         const customer = await this.#repository.getCustomer(id);
-        console.log(customer);
         const result = validator()
-            .validate(id).param('id').isNotEmpty()
             .validate(customer).param('customer').isNotNullOrUndefined();
         
         return Result.fromValidationResult(result)
             .onSuccess(async () => await this.#repository.deleteCustomer(customer));
+    }
+
+    async toggleLoyalty(id) {
+        const customer = await this.#repository.getCustomer(id);
+        const result = validator()
+            .validate(customer).param('customer').isNotNullOrUndefined();
+        
+        return Result.fromValidationResult(result)
+            .onSuccess(() => customer.toggleLoyalty())
+            .onSuccess(async () => await this.#repository.updateCustomer(customer));
     }
 }

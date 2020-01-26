@@ -10,6 +10,9 @@ let Customer = new Schema({
   },
   email: {
       type: String
+  },
+  isLoyal: {
+      type: Boolean
   }
 },
 {
