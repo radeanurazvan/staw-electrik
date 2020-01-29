@@ -8,6 +8,28 @@ module.exports = class AccumulatorsService {
         this.#repository = repository;
     }
 
+    async getDefinitions() {
+        const definitions = await this.#repository.getDefinitions();
+        return definitions.map(d => ({
+            id: d.id,
+            name: d.name,
+            size: d.size,
+            category: d.category
+        }));
+    }
+
+    async getCatalog() {
+        const catalog = await this.#repository.getCatalog();
+        return catalog.map(a => ({
+            id: a.id,
+            name: a.definition.name,
+            size: a.definition.size,
+            category: a.definition.category,
+            price: a.price,
+            stock: a.stock
+        }));
+    }
+
     async deleteDefinition(id) {
         const definition = await this.#repository.getDefinition(id);
         const result = validator()

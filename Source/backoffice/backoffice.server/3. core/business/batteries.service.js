@@ -8,6 +8,26 @@ module.exports = class BatteriesService {
         this.#repository = repository;
     }
 
+    async getDefinitions() {
+        const definitions = await this.#repository.getDefinitions();
+        return definitions.map(d => ({
+            id: d.id,
+            name: d.name,
+            size: d.size
+        }));
+    }
+
+    async getCatalog() {
+        const catalog = await this.#repository.getCatalog();
+        return catalog.map(b => ({
+            id: b.id,
+            name: b.definition.name,
+            size: b.definition.size,
+            price: b.price,
+            stock: b.stock
+        }));
+    }
+
     async deleteDefinition(id) {
         const definition = await this.#repository.getDefinition(id);
         const result = validator()

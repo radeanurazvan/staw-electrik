@@ -12,6 +12,16 @@ module.exports = class BatteriesRepository {
         return new BatteryDefinition(dbDefinition._id, dbDefinition.name, dbDefinition.size);
     }
 
+    async getDefinitions() {
+        const definitions = await BatteryDefinitionModel.find();
+        return definitions.map(x => new BatteryDefinition(x._id, x.name, x.size));
+    }
+
+    async getCatalog() {
+        const catalog = await CatalogBatteryModel.find();
+        return catalog.map(x => new CatalogBattery(x.definition, x.stock, x.price, x._id));
+    }
+
     addDefinition(definition) {
         const dbDefinition = new BatteryDefinitionModel({
             _id: definition.id,

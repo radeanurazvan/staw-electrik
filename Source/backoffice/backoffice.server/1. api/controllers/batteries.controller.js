@@ -4,6 +4,20 @@ const BatteriesRepository = require('../../2. infrastructure/persistence/reposit
 
 const batteriesController = express.Router();
 
+batteriesController.route('/definitions').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getDefinitions();
+        res.status(200).json(result);
+    });
+});
+
+batteriesController.route('/catalog').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getCatalog();
+        res.status(200).json(result);
+    });
+});
+
 batteriesController.route('/definitions/:id').patch(function (req, res) {
     runOnService(async service => {
         const result = await service.promoteDefinition(req.params.id, req.body.stock, req.body.price);

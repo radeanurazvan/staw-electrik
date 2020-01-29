@@ -11,6 +11,16 @@ module.exports = class AccumulatorsRepository {
         }
         return new AccumulatorDefinition(dbDefinition._id, dbDefinition.name, dbDefinition.category, dbDefinition.size);
     }
+    
+    async getDefinitions() {
+        const definitions = await AccumulatorDefinitionModel.find();
+        return definitions.map(x => new AccumulatorDefinition(x._id, x.name, x.category, x.size));
+    }
+
+    async getCatalog() {
+        const catalog = await CatalogAccumulatorModel.find();
+        return catalog.map(x => new CatalogAccumulator(x.definition, x.stock, x.price, x._id));
+    }
 
     addDefinition(definition) {
         const dbDefinition = new AccumulatorDefinitionModel({

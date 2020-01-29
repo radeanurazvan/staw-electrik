@@ -4,6 +4,20 @@ const AccumulatorsRepository = require('../../2. infrastructure/persistence/repo
 
 const accumulatorsController = express.Router();
 
+accumulatorsController.route('/definitions').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getDefinitions();
+        res.status(200).json(result);
+    });
+});
+
+accumulatorsController.route('/catalog').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getCatalog();
+        res.status(200).json(result);
+    });
+});
+
 accumulatorsController.route('/definitions/:id').patch(function (req, res) {
     runOnService(async service => {
         const result = await service.promoteDefinition(req.params.id, req.body.stock, req.body.price);
