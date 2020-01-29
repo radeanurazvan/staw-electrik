@@ -22,6 +22,14 @@ module.exports = class CatalogBattery {
         this.#stock -= quantity;
     }
 
+    toOrderItem() {
+        return {
+            id: this.#id,
+            definition: this.#definition,
+            price: this.#price,
+        };
+    }
+
     get id() { return this.#id; }
     get definition() { return this.#definition; }
     get stock() { return this.#stock; }

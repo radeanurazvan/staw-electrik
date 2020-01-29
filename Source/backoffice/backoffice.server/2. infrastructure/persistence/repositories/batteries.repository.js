@@ -51,7 +51,7 @@ module.exports = class BatteriesRepository {
     }
 
     updateCatalogBattery(battery) {
-        return CatalogBattery.findByIdAndUpdate(battery.id, {
+        return CatalogBatteryModel.findByIdAndUpdate(battery.id, {
             _id: battery.id,
             definition: battery.definition,
             stock: battery.stock,

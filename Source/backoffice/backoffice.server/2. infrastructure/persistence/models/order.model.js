@@ -7,8 +7,8 @@ let Order = new Schema({
   },
   batteries: [Schema.Types.Mixed],
   accumulators: [Schema.Types.Mixed],
-  customerId: {
-    type: String
+  customer: {
+    type: Schema.Types.Mixed
   },
   placedAt: {
       type: Date

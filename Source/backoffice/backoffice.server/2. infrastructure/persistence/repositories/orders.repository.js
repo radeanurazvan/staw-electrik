@@ -5,7 +5,7 @@ module.exports = class OrdersRepository {
     addOrder(order) {
         const dbOrder = new OrderModel({
             _id: order.id,
-            customerId: order.customerId,
+            customer: order.customer,
             batteries: order.batteries,
             accumulators: order.accumulators,
             placedAt: order.placedAt

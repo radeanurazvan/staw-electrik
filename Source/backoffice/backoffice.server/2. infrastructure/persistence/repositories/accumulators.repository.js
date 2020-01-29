@@ -53,7 +53,7 @@ module.exports = class AccumulatorsRepository {
     }
 
     updateCatalogAccumulator(accumulator) {
-        return CatalogAccumulator.findByIdAndUpdate(accumulator.id, {
+        return CatalogAccumulatorModel.findByIdAndUpdate(accumulator.id, {
             _id: accumulator.id,
             definition: accumulator.definition,
             stock: accumulator.stock,
