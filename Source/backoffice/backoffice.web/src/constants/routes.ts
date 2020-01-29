@@ -1,4 +1,10 @@
-import { HomePage, LoginPage, ArticlePage } from '@pages';
+import { 
+    HomePage,
+    BatteriesDefinitionsPage,
+    BatteriesCatalogPage,
+    AccumulatorsDefinitionsPage,
+    AccumulatorsCatalogPage
+} from '@pages';
 
 export interface Route {
     page: any;
@@ -9,11 +15,17 @@ export const routes: {[s: string]: Partial<Route>} = {
     '/home': {
         page: HomePage
     },
-    '/login': {
-        page: LoginPage
+    '/batteries/definitions': {
+        page: BatteriesDefinitionsPage
     },
-    '/article/:id': {
-        page: ArticlePage
+    '/batteries/catalog': {
+        page: BatteriesCatalogPage
+    },
+    '/accumulators/definitions': {
+        page: AccumulatorsDefinitionsPage
+    },
+    '/accumulators/catalog': {
+        page: AccumulatorsCatalogPage
     },
     '*': {
         redirectTo: '/home'

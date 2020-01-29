@@ -1,16 +1,14 @@
 import { Module } from '@framework';
 import { SidebarComponent, FilterBarComponent, NotFoundComponent } from '@components';
-import { HomePage } from '@pages';
-import { ProposalComponent } from './components';
+import { AccumulatorsDefinitionsPage } from './definitions';
 
 @Module({
-    pages: [HomePage],
+    pages: [AccumulatorsDefinitionsPage],
     components: [
         SidebarComponent,
         FilterBarComponent,
-        NotFoundComponent,
-        ProposalComponent
+        NotFoundComponent
     ]
 })
-export class HomeModule {
+export class AccumulatorsModule {
 }

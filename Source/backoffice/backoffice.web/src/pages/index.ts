@@ -1,3 +1,4 @@
 export * from './home';
 export * from './login';
-export * from './article';
+export * from './accumulators'
+export * from './batteries'

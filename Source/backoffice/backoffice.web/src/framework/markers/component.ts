@@ -5,7 +5,7 @@ export interface ComponentConstructor {
 }
 
 export interface HasInputs {
-    gatherInputs(inputs: any): void;
+    gatherInputs(inputs: any, self: any): void;
 }
 
 @injectable()

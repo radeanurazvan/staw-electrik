@@ -22,7 +22,7 @@ export function TrexComponent(params: ComponentParams): any {
             initialize: (e, inputs) => {
                 const component: any = trexContainer.resolve(ctor);
                 if(hasInputs(component)) {
-                    component.gatherInputs(inputs);
+                    component.gatherInputs(inputs, component);
                 }
 
                 return component; 

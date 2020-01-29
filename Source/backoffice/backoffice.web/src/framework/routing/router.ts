@@ -10,7 +10,6 @@ export class Router {
         const navigoConfig: any = {};
         for(const key in routes) {
             navigoConfig[key] = (params: {[x: string]: any}, query: any) => {
-                console.log(params);
                 const config = routes[key];
                 if(config.redirectTo) {
                     Router.router.navigate(config.redirectTo);
@@ -22,7 +21,6 @@ export class Router {
             };
         }
 
-        console.log(navigoConfig);
         Router.router = new Navigo(null, false);        
         Router.router.on(navigoConfig)
             .resolve();

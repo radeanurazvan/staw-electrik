@@ -1,11 +1,18 @@
-import { LoginModule, HomeModule } from "@pages";
 import { Router } from "@framework";
 import { routes } from "@constants";
+import { 
+    LoginModule,
+    HomeModule,
+    BatteriesModule,
+    AccumulatorsModule
+} from "@pages";
 
 export class AppModule {
     private modules: any = [
         LoginModule,
-        HomeModule
+        HomeModule,
+        BatteriesModule,
+        AccumulatorsModule
     ];    
 
     public static run(): void {

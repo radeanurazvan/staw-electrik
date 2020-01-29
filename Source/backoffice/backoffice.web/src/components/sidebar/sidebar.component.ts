@@ -1,9 +1,8 @@
 import * as template from './sidebar.component.html';
-import { TrexComponent, Component, HasInputs } from "@framework";
+import { TrexComponent, Component, HasInputs, RouterService } from "@framework";
 import { Subject } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
 import { inject } from 'inversify';
-import { User } from 'src/shared/models/user.model';
 
 
 @TrexComponent({
@@ -12,9 +11,7 @@ import { User } from 'src/shared/models/user.model';
 })
 export class SidebarComponent extends Component implements HasInputs{
     private channel: Subject<string>;
-    public user: User;
-
-    private menu = {
+    public menu = {
         batteries: true,
         accumulators: false,
         energy: false,
@@ -22,26 +19,36 @@ export class SidebarComponent extends Component implements HasInputs{
         orders: false
     };
 
-    public constructor(@inject(UserService) userService: UserService) {
+    public constructor(@inject(RouterService) private router) {
         super();
-        this.user = userService.getUser();
     }
 
-    public gatherInputs(inputs: any): void {
-        this.channel = inputs.channel;
+    public gatherInputs(inputs: any, self: SidebarComponent): void {
+        this.channel = inputs.channel || new Subject<string>();
+        this.setSelectedMenuKey(inputs.selected, self);
     }
 
     public selected(event: any, self: SidebarComponent) {
-        for(var key in self.menu) {
-            self.menu[key] = false;
+        const menuValue = event.target.getAttribute('data-value');
+        if(menuValue) {
+            self.setSelectedMenuKey(menuValue, self);
+            self.channel.next(menuValue);
         }
 
-        const clickedKey = event.target.getAttribute('data-value');
-        self.menu[clickedKey] = true;
-        self.channel.next(clickedKey);
+        const routeValue = event.target.getAttribute('data-route');
+        if(routeValue) {
+            self.router.goTo(routeValue);
+        }
     }
 
-    public isSelected(key) {
-        return this.menu[key];
+    private setSelectedMenuKey(key: string, self: SidebarComponent) {
+        if(!key) {
+            return;
+        }
+
+        for(var menuKey in self.menu) {
+            self.menu[menuKey] = false;
+        }
+        self.menu[key] = true;
     }
 }
