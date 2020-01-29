@@ -1,43 +1,62 @@
 <div class="sidebar mobile-hidden">
     <header class="logo">
-        <h1>TReX</h1>
+        <h1>EleCtriK</h1>
     </header>
 
     <div class="sidebar-container">
         <div class="user-info">
             <div class="initials-container">
                 <div class="initials">
-                    {user.initials}
+                    A
                 </div>
             </div>
 
             <div class="about-user">
                 <div class="name">
-                    {user.name}
-                </div>
-                <div class="occupation">
-                    {user.occupation}
+                    Admin
                 </div>
             </div>
         </div>
 
         <div class="menu">
             <ul>
-                <li rv-class-selected="isDiscoverActive" rv-on-click="selected">
+                <li data-value="batteries" rv-class-selected="menu.batteries" rv-on-click="selected">
                     <i class="fa fa-fire"></i>
-                    Discover
+                    Batteries
                 </li>
-                <li rv-class-selected="isHistoryActive" rv-on-click="selected">
+                <li data-value="batteries/catalog" rv-show="menu.batteries" rv-class-selected="menu.batteries" rv-on-click="goTo">
+                    Catalog
+                </li>
+                <li data-value="batteries/definitions" rv-show="menu.batteries" rv-class-selected="menu.batteries" rv-on-click="goTo">
+                    Definitions
+                </li>
+                <li data-value="accumulators" rv-class-selected="menu.accumulators" rv-on-click="selected">
                     <i class="fa fa-book-open"></i>
-                    History
+                    Accumulators
                 </li>
-                <li rv-class-selected="isSavedActive" rv-on-click="selected">
+                <li data-value="accumulators/catalog" rv-show="menu.accumulators" rv-class-selected="menu.accumulators" rv-on-click="goTo">
+                    Catalog
+                </li>
+                <li data-value="accumulators/definitions" rv-show="menu.accumulators" rv-class-selected="menu.accumulators" rv-on-click="goTo">
+                    Definitions
+                </li>
+                <li data-value="energy" rv-class-selected="menu.energy" rv-on-click="selected">
                     <i class="fa fa-bookmark"></i>
-                    Saved
+                    Energy 
                 </li>
-                <li rv-class-selected="isProposalsActive" rv-on-click="selected">
+                <li data-value="energy/catalog" rv-show="menu.energy" rv-class-selected="menu.energy" rv-on-click="goTo">
+                    Catalog
+                </li>
+                <li data-value="energy/definitions" rv-show="menu.energy" rv-class-selected="menu.energy" rv-on-click="goTo">
+                    Definitions
+                </li>
+                <li data-value="customers" rv-class-selected="menu.customers" rv-on-click="selected">
                     <i class="fa fa-question"></i>
-                    Proposals
+                    Customers
+                </li>
+                <li data-value="orders" rv-class-selected="menu.orders" rv-on-click="selected">
+                    <i class="fa fa-question"></i>
+                    Orders
                 </li>
             </ul>
         </div>

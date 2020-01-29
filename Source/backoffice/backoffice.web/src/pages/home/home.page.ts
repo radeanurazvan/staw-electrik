@@ -31,23 +31,11 @@ export class HomePage extends Page implements OnInit {
     public discoveredResources: Resource[] = [];
     public searchedResources: Resource[] = [];
 
-    public constructor(
-        @inject(DomMaster) master: DomMaster,
-        @inject(ResourcesService) private resourcesService,
-        @inject(NotificationsService) private notifications) {
-        
+    public constructor(@inject(DomMaster) master: DomMaster) {
         super(master);
-        resourcesService.find('.NET', 1, 'title');
     }
 
     public onInit(): void {
-        this.resourcesService.find('', 1, 'title').then((x) => {
-            this.resourcesPage = x;
-                
-            this.updatedArticles = this.resourcesPage.items;
-            this.initChannels();
-            this.orderArticlePreviews(this.localOrderByValue);
-        });
     }
 
     private initChannels(): void {
@@ -64,10 +52,6 @@ export class HomePage extends Page implements OnInit {
                     this.filterArticlePreviewsByFilter(this.localFilterByValue);
                 }
             }
-        });
-
-        this.proposalChannel.subscribe((value: string) => {
-            //handle form input - make request
         });
 
         this.sidebarChannel.subscribe((value: string) => {
@@ -154,21 +138,10 @@ export class HomePage extends Page implements OnInit {
     public searchTopic(e: Event, self: HomePage): void {
         e.preventDefault();
         self.discoveredResources = [];
-
-        self.resourcesService.find(self.topic, 1, 'newest').then((page: PageResponse) => {
-            self.searchedResources = [];
-            self.searchedResources = page.items;
-
-            if(self.searchedResources.length == 0) {
-                self.notifications.pushError(NotificationMessage.error("No results for " + self.topic));
-            }
-        });
     }
 
     public discoverMore(e: Event, self: HomePage): void {
         e.preventDefault();
         self.discoveredResources = [];
-
-        self.resourcesService.discoverTopic(self.topic);
     }
 }

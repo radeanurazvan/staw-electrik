@@ -1,5 +1,5 @@
 .sidebar {
-    width: 200px;
+    min-width: 200px;
     height: 100vh;
     background-color: #fff;
     border-right: 1px solid #f1f1f1;
@@ -85,12 +85,16 @@
 
 .menu li {
     width: 100%;
+    position: relative;
 
+    .sub-menu {
+        position: absolute;
+    }
 }
 
 .menu li i {
     font-size: 24px;
-    min-width:40px;
+    width:30px;
     display: flex;
     justify-content: center;
     margin-right: 10px;

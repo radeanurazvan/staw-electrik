@@ -14,10 +14,13 @@ export class SidebarComponent extends Component implements HasInputs{
     private channel: Subject<string>;
     public user: User;
 
-    isDiscoverActive: boolean = true;
-    isHistoryActive: boolean = false;
-    isSavedActive: boolean = false;
-    isProposalsActive: boolean = false;
+    private menu = {
+        batteries: true,
+        accumulators: false,
+        energy: false,
+        customers: false,
+        orders: false
+    };
 
     public constructor(@inject(UserService) userService: UserService) {
         super();
@@ -28,45 +31,17 @@ export class SidebarComponent extends Component implements HasInputs{
         this.channel = inputs.channel;
     }
 
-    public selected(clickedElement: any, self: SidebarComponent) {
-        if (clickedElement.path[0].innerText === 'DISCOVER') {
-            if(self.isDiscoverActive === false) {
-                self.channel.next(clickedElement.path[0].innerText);
-                self.isDiscoverActive = true;
-                self.isHistoryActive = false;
-                self.isProposalsActive = false;
-                self.isSavedActive = false;
-            }
+    public selected(event: any, self: SidebarComponent) {
+        for(var key in self.menu) {
+            self.menu[key] = false;
         }
 
-        if (clickedElement.path[0].innerText === 'HISTORY') {
-            if(self.isHistoryActive === false) {
-                self.channel.next(clickedElement.path[0].innerText);
-                self.isHistoryActive = true;
-                self.isProposalsActive = false;
-                self.isSavedActive = false;
-                self.isDiscoverActive = false;
-            }
-        }
+        const clickedKey = event.target.getAttribute('data-value');
+        self.menu[clickedKey] = true;
+        self.channel.next(clickedKey);
+    }
 
-        if (clickedElement.path[0].innerText === 'SAVED') {
-            if(self.isSavedActive === false) {
-                self.channel.next(clickedElement.path[0].innerText);
-                self.isHistoryActive = false;
-                self.isProposalsActive = false;
-                self.isSavedActive = true;
-                self.isDiscoverActive = false;
-            }
-        }
-
-        if (clickedElement.path[0].innerText === 'PROPOSALS') {
-            if(self.isProposalsActive === false) {
-                self.channel.next(clickedElement.path[0].innerText);
-                self.isHistoryActive = false;
-                self.isProposalsActive = true;
-                self.isSavedActive = false;
-                self.isDiscoverActive = false;
-            }
-        }
+    public isSelected(key) {
+        return this.menu[key];
     }
 }
