@@ -3,7 +3,11 @@ import {
     BatteriesDefinitionsPage,
     BatteriesCatalogPage,
     AccumulatorsDefinitionsPage,
-    AccumulatorsCatalogPage
+    AccumulatorsCatalogPage,
+    EnergyDefinitionsPage,
+    EnergyCatalogPage,
+    CustomersPage,
+    OrdersPage
 } from '@pages';
 
 export interface Route {
@@ -26,6 +30,18 @@ export const routes: {[s: string]: Partial<Route>} = {
     },
     '/accumulators/catalog': {
         page: AccumulatorsCatalogPage
+    },
+    '/energy/definitions': {
+        page: EnergyDefinitionsPage
+    },
+    '/energy/catalog': {
+        page: EnergyCatalogPage
+    },
+    '/customers': {
+        page: CustomersPage
+    },
+    '/orders': {
+        page: OrdersPage
     },
     '*': {
         redirectTo: '/home'

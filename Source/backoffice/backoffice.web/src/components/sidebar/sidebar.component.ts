@@ -1,7 +1,6 @@
 import * as template from './sidebar.component.html';
 import { TrexComponent, Component, HasInputs, RouterService } from "@framework";
 import { Subject } from 'rxjs';
-import { UserService } from 'src/shared/services/user.service';
 import { inject } from 'inversify';
 
 

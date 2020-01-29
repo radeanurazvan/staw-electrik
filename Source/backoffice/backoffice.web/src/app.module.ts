@@ -4,7 +4,9 @@ import {
     LoginModule,
     HomeModule,
     BatteriesModule,
-    AccumulatorsModule
+    AccumulatorsModule,
+    EnergyModule,
+    OrdersModule
 } from "@pages";
 
 export class AppModule {
@@ -12,7 +14,9 @@ export class AppModule {
         LoginModule,
         HomeModule,
         BatteriesModule,
-        AccumulatorsModule
+        AccumulatorsModule,
+        EnergyModule,
+        OrdersModule
     ];    
 
     public static run(): void {

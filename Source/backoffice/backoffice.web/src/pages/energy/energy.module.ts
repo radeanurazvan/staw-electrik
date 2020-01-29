@@ -1,15 +1,15 @@
 import { Module } from '@framework';
 import { SidebarComponent, FilterBarComponent, NotFoundComponent } from '@components';
-import { AccumulatorsDefinitionsPage } from './definitions';
-import { AccumulatorsCatalogPage } from './catalog';
+import { EnergyDefinitionsPage } from './definitions';
+import { EnergyCatalogPage } from './catalog';
 
 @Module({
-    pages: [AccumulatorsDefinitionsPage, AccumulatorsCatalogPage],
+    pages: [EnergyDefinitionsPage, EnergyCatalogPage],
     components: [
         SidebarComponent,
         FilterBarComponent,
         NotFoundComponent
     ]
 })
-export class AccumulatorsModule {
+export class EnergyModule {
 }
