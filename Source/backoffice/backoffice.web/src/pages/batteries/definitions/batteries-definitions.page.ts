@@ -29,6 +29,7 @@ class Battery {
     
     public async delete(e, model) {
         await model.service.delete(model.battery.id);
+        model.notifications.pushSuccess(NotificationMessage.success('Definition deleted'));
     }
 }
 

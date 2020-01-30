@@ -31,6 +31,7 @@ class Accumulator {
     
     public async delete(e, model) {
         await model.service.delete(model.accumulator.id);
+        model.notifications.pushSuccess(NotificationMessage.success('Definition deleted'));
     }
 
     private static mapCategory(x) {
