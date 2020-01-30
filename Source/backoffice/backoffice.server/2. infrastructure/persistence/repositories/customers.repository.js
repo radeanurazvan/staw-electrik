@@ -4,7 +4,7 @@ const Customer = require('../../../3. core/domain/customer/customer');
 module.exports = class BatteriesRepository {
     async getCustomers() {
         const dbCustomers = await CustomerModel.find();
-        return dbCustomers.map(c => new Customer(c.name, c.email, c._id));
+        return dbCustomers.map(c => new Customer(c.name, c.email, c._id, c.isLoyal));
     }
 
     async getCustomer(id) {

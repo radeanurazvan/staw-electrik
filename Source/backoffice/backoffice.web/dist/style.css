@@ -378,6 +378,10 @@ a {
   .page-content header {
     margin-bottom: 30px; }
 
+.customers-header {
+  display: flex;
+  justify-content: space-between; }
+
 /* MOBILE  */
 @media only screen and (max-width: 599px) {
   .mobile-hidden {

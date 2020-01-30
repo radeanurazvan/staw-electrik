@@ -9,13 +9,23 @@ module.exports = class CustomersService {
         this.#repository = repository;
     }
 
+    async getAll() {
+        const customers = await this.#repository.getCustomers();
+        return customers.map(c => ({
+            id: c.id,
+            name: c.name,
+            email: c.email,
+            isLoyal: c.isLoyal
+        }));
+    }
+
     async createCustomer(name, email) {
         const duplicateEmail = (await this.#repository.getCustomers())
             .some(c => c.email === email);
         const result = validator()
             .validate(duplicateEmail).param('uniqueEmail').passes(x => !x, 'Email shoud be unique!')
             .validate(name).param('definition').isNotEmpty()
-            .validate(email).param('email').isNotEmpty();
+            .validate(email).param('email').isNotEmpty().isEmail();
 
         return Result.fromValidationResult(result)
             .onSuccess(async () => await this.#repository.addCustomer(new Customer(name, email)));

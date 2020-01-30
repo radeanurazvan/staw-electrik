@@ -4,6 +4,13 @@ const CustomersRepository = require('../../2. infrastructure/persistence/reposit
 
 const customersController = express.Router();
 
+customersController.route('').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getAll();
+        res.status(200).json(result);
+    });
+});
+
 customersController.route('').post(function (req, res) {
     runOnService(async service => {
         const result = await service.createCustomer(req.body.name, req.body.email);

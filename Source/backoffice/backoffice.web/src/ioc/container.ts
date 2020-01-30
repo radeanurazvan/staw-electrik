@@ -8,6 +8,7 @@ import { NotificationsService } from '@framework/notifications';
 import { BatteriesService } from '../pages/batteries/batteries.service';
 import { AccumulatorsService } from '../pages/accumulators/accumulators.service';
 import { EnergyService } from 'src/pages/energy/energy.service';
+import { CustomersService } from 'src/pages/customers/customers.service';
 
 const container = new Container();
 container.bind<DomMaster>(DomMaster).toSelf();
@@ -17,5 +18,6 @@ container.bind<NotificationsService>(NotificationsService).toSelf();
 container.bind<BatteriesService>(BatteriesService).toSelf();
 container.bind<AccumulatorsService>(AccumulatorsService).toSelf();
 container.bind<EnergyService>(EnergyService).toSelf();
+container.bind<CustomersService>(CustomersService).toSelf();
 
 export const trexContainer = container;
