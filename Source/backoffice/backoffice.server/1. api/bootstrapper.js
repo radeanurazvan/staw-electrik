@@ -4,6 +4,7 @@ const Subscriptions = require('../2. infrastructure/providers/subscriptions');
 const BatteriesRepository = require('../2. infrastructure/persistence/repositories/batteries.repository');
 const AccumulatorsRepository = require('../2. infrastructure/persistence/repositories/accumulators.repository');
 const EnergyProvidersRepository = require('../2. infrastructure/persistence/repositories/energy-providers.repository');
+const CustomersRepository = require('../2. infrastructure/persistence/repositories/customers.repository');
 const config = require('./config');
 
 module.exports = class Bootstrapper {
@@ -24,7 +25,8 @@ module.exports = class Bootstrapper {
         return new Subscriptions(bus, {
             batteries: new BatteriesRepository(),
             accumulators: new AccumulatorsRepository(),
-            energyProviders: new EnergyProvidersRepository() 
+            energyProviders: new EnergyProvidersRepository(),
+            customers: new CustomersRepository()
         }).bootstrap(); 
     }
 }

@@ -1,3 +1,4 @@
+const io = require('socket.io');
 const queues = require('../../../../kernel/messaging/queues');
 const BatteryDefinition = require('../../3. core/domain/battery/battery-definition');
 const AccumulatorDefinition = require('../../3. core/domain/accumulator/accumulator-definition');
@@ -21,6 +22,24 @@ module.exports = class BusSubscriptions {
         });
         this.#bus.subscribe(queues.energyProviders, async x => {
             await this.#repositories.energyProviders.addDefinition(new EnergyProviderDefinition(x.id, x.name, x.coordinates))
+        });
+
+        this.#bus.subscribe('PRICE_CHANGED', async x => {
+            const customers = await this.repositories.customers.getCustomers();
+            const loyalCustomers = customers.filter(c => c.isLoyal);
+
+            loyalCustomers.forEach(c => {
+                io().for(c.email).emit('PRICE_CHANGED', x);
+            });
+        });
+        
+        this.#bus.subscribe('STOCK_CHANGED', async x => {
+            const customers = await this.repositories.customers.getCustomers();
+            const loyalCustomers = customers.filter(c => c.isLoyal);
+
+            loyalCustomers.forEach(c => {
+                io().for(c.email).emit('STOCK_CHANGED', x);
+            });
         });
     }
 }

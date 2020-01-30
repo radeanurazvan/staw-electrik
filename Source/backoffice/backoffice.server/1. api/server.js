@@ -22,6 +22,9 @@ const customersController = require('./controllers/customers.controller');
 const ordersController = require('./controllers/orders.controller');
 
 const app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -33,8 +36,12 @@ app.use('/api/orders', ordersController);
 
 new Bootstrapper().bootsrapAll();
 
+io.on('connection', function (socket) {
+    console.log('io connection');
+});
+
 let port = process.env.PORT || 5000;
-app.listen(port, function(){
+server.listen(port, function(){
     console.log('Listening on port ' + port);
 });
 
