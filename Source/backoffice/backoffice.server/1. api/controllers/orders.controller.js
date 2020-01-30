@@ -7,6 +7,13 @@ const CustomersRepository = require('../../2. infrastructure/persistence/reposit
 
 const ordersController = express.Router();
 
+ordersController.route('').get(function (req, res) {
+    runOnService(async service => {
+        const result = await service.getAll();
+        res.status(200).json(result);
+    });
+});
+
 ordersController.route('').post(function (req, res) {
     runOnService(async service => {
         const result = await service.createOrder(req.body.customerId, req.body.batteries, req.body.accumulators);

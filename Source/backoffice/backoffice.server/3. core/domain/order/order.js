@@ -25,8 +25,13 @@ module.exports = class Order {
         this.#placedAt = placedAt;
     }
 
-    static fromDetails() {
-        
+    static fromDetails(id, customer, batteries, accumulators, placedAt) {
+        const order = new Order(customer, [], [], id, placedAt)
+
+        order.#batteries = batteries;
+        order.#accumulators = accumulators;
+
+        return order;
     }
 
     get id() { return this.#id; }

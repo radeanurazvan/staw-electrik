@@ -9,6 +9,42 @@ module.exports = class OrdersService {
         this.#repositories = repositories;
     }
 
+    async getAll() {
+        const orders = await this.#repositories.orders.getAll();
+        return orders.map(o => ({
+            id: o.id,
+            placedAt: o.placedAt,
+            customer: {
+                id: o.customer.id,
+                name: o.customer.name,
+                email: o.customer.email
+            },
+            batteries: o.batteries.map(b => ({
+                quantity: b.quantity,
+                battery: {
+                    price: b.battery.price,
+                    id: b.battery.id,
+                    definition: {
+                        name: b.battery.definition.name,
+                        size: b.battery.definition.size
+                    }
+                }
+            })),
+            accumulators: o.accumulators.map(b => ({
+                quantity: b.quantity,
+                accumulator: {
+                    price: b.accumulator.price,
+                    id: b.accumulator.id,
+                    definition: {
+                        name: b.accumulator.definition.name,
+                        size: b.accumulator.definition.size,
+                        category: b.accumulator.definition.category
+                    }
+                }
+            }))
+        }));
+    }
+
     async createOrder(customerId, batteries, accumulators) {
         const customer = await this.#repositories.customers.getCustomer(customerId);
         const orderBatteriesPromises = batteries.map(async (b) => {
