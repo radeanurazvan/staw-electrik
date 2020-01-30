@@ -17,11 +17,11 @@ class Battery {
 
     public async promote(e, model) {
         const price = prompt("Please enter price for the battery:");
-        const stock = prompt("Please enter stock fpr the battery:");
+        const stock = prompt("Please enter stock for the battery:");
 
         try {
             await model.service.promote(model.battery.id, {price, stock});
-            model.notifications.pushSuccess(NotificationMessage.success('Definitioned promoted to catalog'));
+            model.notifications.pushSuccess(NotificationMessage.success('Definition promoted to catalog'));
         } catch(e) {
             model.notifications.pushError(NotificationMessage.error(e.response.data.error));
         }
