@@ -6,7 +6,8 @@ import {
     EnergyDefinitionsPage,
     EnergyCatalogPage,
     CustomersPage,
-    OrdersPage
+    OrdersPage,
+    CreateOrderPage
 } from '@pages';
 
 export interface Route {
@@ -41,6 +42,9 @@ export const routes: {[s: string]: Partial<Route>} = {
     },
     '/orders': {
         page: OrdersPage
+    },
+    '/orders/create': {
+        page: CreateOrderPage
     },
     '*': {
         redirectTo: '/home'

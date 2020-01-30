@@ -13,6 +13,7 @@ export class OrdersService {
     }
 
     public async create(data): Promise<any> {
+        console.log(data);
         await Axios.post(`${this.serviceUri}`, data);
         this.changesChannel.next();
     }

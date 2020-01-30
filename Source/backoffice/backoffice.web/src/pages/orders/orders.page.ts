@@ -1,5 +1,5 @@
 import { inject } from 'inversify';
-import { TrexPage, DomMaster, Page, OnInit } from '@framework';
+import { TrexPage, DomMaster, Page, OnInit, RouterService } from '@framework';
 
 import * as template from './orders.page.html'
 import { OrdersService } from './orders.service';
@@ -12,7 +12,8 @@ export class OrdersPage extends Page implements OnInit {
 
     public constructor(
         @inject(DomMaster) master: DomMaster,
-        @inject(OrdersService) private service: OrdersService) {
+        @inject(OrdersService) private service: OrdersService,
+        @inject(RouterService) private router: RouterService) {
         super(master);
     }
 
@@ -26,4 +27,7 @@ export class OrdersPage extends Page implements OnInit {
         }));
     }
 
+    public create(e, self) {
+        self.router.goTo('/orders/create');
+    }
 }
