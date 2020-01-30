@@ -45,7 +45,7 @@ class Battery {
     template: template
 })
 export class BatteriesCatalogPage extends Page implements OnInit {
-    public batteries: any[] = [];
+    public batteries: Battery[] = [];
 
     public constructor(
         @inject(DomMaster) master: DomMaster,

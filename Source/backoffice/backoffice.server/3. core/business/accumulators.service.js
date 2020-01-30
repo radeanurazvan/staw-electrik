@@ -73,7 +73,7 @@ module.exports = class AccumulatorsService {
     }
 
     async changeStock(id, stock) {
-        const accumulator = await this.#repository.getCatalogBattery(id);
+        const accumulator = await this.#repository.getCatalogAccumulator(id);
         const oldStock = accumulator ? accumulator.stock : 0;
 
         const result = validator()
