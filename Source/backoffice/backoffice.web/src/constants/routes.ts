@@ -1,5 +1,4 @@
 import { 
-    HomePage,
     BatteriesDefinitionsPage,
     BatteriesCatalogPage,
     AccumulatorsDefinitionsPage,
@@ -17,7 +16,7 @@ export interface Route {
 
 export const routes: {[s: string]: Partial<Route>} = {
     '/home': {
-        page: HomePage
+        page: BatteriesDefinitionsPage
     },
     '/batteries/definitions': {
         page: BatteriesDefinitionsPage

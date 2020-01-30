@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
 
-@import 'home/home.page';
 @import 'login/pages/login.page';
 
 @import 'sidebar/sidebar.component';
@@ -64,6 +63,14 @@ a {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.page-content {
+    padding: 30px;
+
+    header {
+        margin-bottom: 30px;
+    }
 }
 
 /* MOBILE  */

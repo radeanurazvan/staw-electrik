@@ -2,7 +2,6 @@ import { Router } from "@framework";
 import { routes } from "@constants";
 import { 
     LoginModule,
-    HomeModule,
     BatteriesModule,
     AccumulatorsModule,
     EnergyModule,
@@ -12,7 +11,6 @@ import {
 export class AppModule {
     private modules: any = [
         LoginModule,
-        HomeModule,
         BatteriesModule,
         AccumulatorsModule,
         EnergyModule,

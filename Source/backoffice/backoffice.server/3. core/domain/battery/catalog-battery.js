@@ -30,6 +30,14 @@ module.exports = class CatalogBattery {
         };
     }
 
+    changePrice(price) {
+        this.#price = price;
+    }
+
+    changeStock(stock) {
+        this.#stock = stock;
+    }
+
     get id() { return this.#id; }
     get definition() { return this.#definition; }
     get stock() { return this.#stock; }

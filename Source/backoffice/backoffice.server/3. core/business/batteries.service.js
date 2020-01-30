@@ -3,9 +3,11 @@ const Result = require('../../../../kernel/functional/result');
 
 module.exports = class BatteriesService {
     #repository;
+    #bus;
 
-    constructor(repository) {
+    constructor(repository, bus) {
         this.#repository = repository;
+        this.#bus = bus;
     }
 
     async getDefinitions() {
@@ -48,5 +50,41 @@ module.exports = class BatteriesService {
             .map(d => d.promote(stock, price))
             .onSuccess(async a => { await this.#repository.addInCatalog(a)})
             .onSuccess(async () => await this.#repository.deleteDefinition(definition.id));
+    }
+
+    async changePrice(id, price) {
+        const battery = await this.#repository.getCatalogBattery(id);
+        const oldPrice = battery ? battery.price : 0;
+
+        const result = validator()
+            .validate(battery).param('battery').isNotNullOrUndefined()
+            .validate(price).param('price').isPositive();
+        
+        return Result.fromValidationResult(result)
+            .onSuccess(() => battery.changePrice(price))
+            .onSuccess(async () => await this.#repository.updateCatalogBattery(battery))
+            .onSuccess(() => this.#bus.publish("PRICE_CHANGED", {
+                name: battery.name,
+                newPrice: battery.price,
+                oldPrice
+            }));
+    }
+
+    async changeStock(id, stock) {
+        const battery = await this.#repository.getCatalogBattery(id);
+        const oldStock = battery ? battery.stock : 0;
+
+        const result = validator()
+            .validate(battery).param('battery').isNotNullOrUndefined()
+            .validate(stock).param('stock').isPositive();
+        
+        return Result.fromValidationResult(result)
+            .onSuccess(() => battery.changeStock(stock))
+            .onSuccess(async () => await this.#repository.updateCatalogBattery(battery))
+            .onSuccess(() => this.#bus.publish("STOCK_CHANGED", {
+                name: battery.name,
+                newStock: battery.stock,
+                oldStock
+            }));
     }
 }

@@ -1,114 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,600);.your-proposal-title {
-  font-size: 50px;
-  font-weight: 700;
-  margin: 50px;
-  color: #646464; }
-
-.proposal {
-  color: #646464;
-  font-size: 25px;
-  margin: 15px 50px; }
-
-.proposal-container {
-  display: flex;
-  flex-direction: row;
-  overflow-y: auto;
-  height: calc(100vh - 60px); }
-  .proposal-container .proposal-left-container {
-    width: 50%; }
-  .proposal-container .proposal-right-container {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column; }
-    .proposal-container .proposal-right-container .fa-folder-plus {
-      font-size: 300px;
-      color: #646464; }
-  .proposal-container input {
-    width: 75%;
-    padding: 10px;
-    border: 2px solid #d8d8d8;
-    font-weight: 500; }
-  .proposal-container textarea {
-    width: 75%;
-    height: 70px;
-    padding: 10px;
-    border: 2px solid #d8d8d8;
-    font-weight: 500; }
-  .proposal-container select {
-    width: 75%;
-    padding: 10px;
-    border: 2px solid #d8d8d8;
-    font-weight: 500; }
-
-@media only screen and (max-width: 1200px) {
-  .proposal-right-container {
-    display: none !important; }
-  .proposal-left-container {
-    width: 100% !important; } }
-
-@media only screen and (max-width: 600px) {
-  .proposal-left-container .your-proposal-title {
-    font-size: 20px;
-    margin: 20px; }
-  .proposal-left-container .proposal {
-    font-size: 10px;
-    margin: 5px 20px; }
-  .proposal-left-container input, .proposal-left-container textarea, .proposal-left-container select {
-    width: 100%; } }
-
-.home {
-  color: #e9cb2a; }
-
-.home-container {
-  display: flex;
-  flex-direction: row; }
-
-.home-right-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column; }
-
-.article-preview-container {
-  height: calc(100vh - 150px);
-  background-color: #f9f9f9;
-  overflow-y: auto; }
-
-#home .discover {
-  padding: 20px; }
-  #home .discover header {
-    display: flex;
-    justify-content: center; }
-  #home .discover .search {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center; }
-    #home .discover .search input {
-      width: 60%;
-      padding: 10px;
-      border: 2px solid #d8d8d8;
-      font-weight: 500; }
-    #home .discover .search button {
-      background: #ededed;
-      color: #999;
-      cursor: pointer;
-      border: 0;
-      outline: none;
-      padding: 10px;
-      border-radius: 4px;
-      font-size: 15px;
-      transition: all 0.4s;
-      margin: 8px; }
-  #home .discover footer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center; }
-  #home .discover .found-resources {
-    max-height: 500px;
-    overflow-y: scroll; }
-
-trex-login-email {
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,600);trex-login-email {
   padding: 50px;
   width: 50%;
   height: 50vh;
@@ -482,6 +372,11 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column; }
+
+.page-content {
+  padding: 30px; }
+  .page-content header {
+    margin-bottom: 30px; }
 
 /* MOBILE  */
 @media only screen and (max-width: 599px) {
